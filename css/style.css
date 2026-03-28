@@ -80,6 +80,13 @@ nav {
     font-weight: 600;
     letter-spacing: -0.5px;
     z-index: 1001;
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: var(--text-color); /* Giữ màu chữ chính */
+    transition: var(--transition);
+}
+
+.logo:hover {
+    opacity: 0.7; /* Thêm hiệu ứng hover nhẹ */
 }
 
 .nav-right {
