@@ -72,27 +72,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Mobile Menu Toggle (Simplified)
+    // 4. Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
-            const isVisible = navLinks.style.display === 'flex';
-            navLinks.style.display = isVisible ? 'none' : 'flex';
+            navLinks.classList.toggle('active');
             
-            // Thêm các styles cơ bản cho mobile menu khi mở
-            if (!isVisible) {
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '80px';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.background = '#fff';
-                navLinks.style.padding = '2rem';
-                navLinks.style.borderBottom = '1px solid #eee';
-                navLinks.style.gap = '1.5rem';
+            // Hamburger to X animation
+            const spans = menuToggle.querySelectorAll('span');
+            if (navLinks.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg)';
+            } else {
+                spans[0].style.transform = 'rotate(0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0)';
             }
         });
     }
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const spans = menuToggle.querySelectorAll('span');
+            spans[0].style.transform = 'rotate(0)';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'rotate(0)';
+        });
+    });
 });
